@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Gita 💝</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ffe6f2, #fff0f5, #ffe6f2);
+            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "🌸 🎀 💖 🌸 🎀 💖";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+            font-size: 24px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 20px;
+            padding: 20px;
+            z-index: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            backdrop-filter: blur(8px);
+            border: 3px solid rgba(255, 182, 193, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .container::before,
+        .container::after {
+            content: "✨";
+            position: absolute;
+            font-size: 2rem;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        .container::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .container::after {
+            bottom: -10px;
+            right: -10px;
+        }
+
+        .question {
+            color: #ff69b4;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+            animation: bounce 2s infinite;
+            padding: 10px;
+            background: linear-gradient(45deg, rgba(255,182,193,0.2), rgba(255,105,180,0.2));
+            border-radius: 15px;
+        }
+
+        .image-container {
+            position: relative;
+            margin: 1rem auto;
+            width: 180px;
+        }
+
+        .image-placeholder {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #ffb6c1;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        .image-container::before,
+        .image-container::after {
+            content: "🌟";
+            position: absolute;
+            font-size: 1.5rem;
+            animation: rotate 3s linear infinite;
+        }
+
+        .image-container::before {
+            left: 0;
+            top: 50%;
+        }
+
+        .image-container::after {
+            right: 0;
+            top: 50%;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .image-placeholder:hover img {
+            transform: scale(1.1);
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1.5rem;
+            position: relative;
+            min-height: 120px;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, #ff69b4, #ff8da1);
+            color: white;
+            border: 3px solid #fff;
+            z-index: 2;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+            color: white;
+            z-index: 1;
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: floatUp 4s linear forwards;
+            z-index: 1000;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: slideIn 0.5s ease-out;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translate(-50%, -100%); }
+            to { transform: translate(-50%, 0); }
+        }
+
+        .decoration {
+            position: absolute;
+            font-size: 1.2rem;
+            pointer-events: none;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .d1 { top: 10%; left: 10%; animation-delay: 0.2s; }
+        .d2 { top: 20%; right: 10%; animation-delay: 0.5s; }
+        .d3 { bottom: 10%; left: 15%; animation-delay: 0.8s; }
+        .d4 { bottom: 20%; right: 15%; animation-delay: 1.1s; }
+    </style>
+</head>
+<body>
+    <div class="decoration d1">🎀</div>
+    <div class="decoration d2">🌸</div>
+    <div class="decoration d3">💝</div>
+    <div class="decoration d4">✨</div>
+
+    <div class="container">
+        <div class="question">Apakah Ardi Baik-Baik Saja Hari Ini? 🌸</div>
+        <div class="image-container">
+            <div class="image-placeholder">
+                <img src="foto.jpg" alt="Ardi Picture">
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="showLove()">Iya dongg 🥰</button>
+            <button class="btn btn-no" id="noButton">Tidak 😢</button>
+        </div>
+    </div>
+    <div class="notification" id="notification">
+        Wahh Alhamdulillah Dong, Ardi Ikut Senang Kalo Gitu! 🎉✨
+    </div>
+
+    <script>
+        function showLove() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => notification.style.display = 'none', 3000);
+
+            for (let i = 0; i < 30; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '💝', '💕', '💗', '💓', '💘', '💞', '💫'][Math.floor(Math.random() * 8)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        function moveButton() {
+            const button = document.getElementById('noButton');
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = window.innerWidth * 0.7;
+            const maxY = window.innerHeight * 0.7;
+            const minX = window.innerWidth * 0.15;
+            const minY = window.innerHeight * 0.15;
+            
+            const newX = Math.random() * (maxX - minX) + minX;
+            const newY = Math.random() * (maxY - minY) + minY;
+            
+            button.style.position = 'fixed';
+            button.style.left = `${newX}px`;
+            button.style.top = `${newY}px`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const noButton = document.getElementById('noButton');
+            
+            noButton.addEventListener('mouseover', moveButton);
+            noButton.addEventListener('click', moveButton);
+            noButton.addEventListener('touchstart', moveButton);
+        });
+    </script>
+</body>
+</html>
